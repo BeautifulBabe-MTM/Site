@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "El Weedo 420";
+}
+@using WebApplication8.Models;
+@{
+    var stuff = (List<Stuff>)ViewBag.Stuff;
+    var categories = (List<Category>)ViewBag.Categories;
+
+    var cat = (List<string>)ViewBag.Cat;
+}
+
+
+<div class="index-search">
+    <form id="form">
+        <input type="search" id="query" name="q" placeholder="Поиск...">
+        <button>Поиск</button>
+    </form>
+</div>
+<main>
+
+    <div class="sidesort">
+        <form method="post">
+            <div class="authors">
+                <h4>Категории</h4>
+                @foreach (var item in categories)
+                {
+                    <div>
+                        @if (cat.Any(id => id == item.ID.ToString()))
+                        {
+                            <input type="checkbox" name="category[]" class="item" value="@item.ID" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="category[]" class="item" value="@item.ID" />
+                        }
+                        <label for="category[]">@item.Name  (@stuff.Where(p=>p.Category_id==item.ID).Count())</label>
+                    </div>
+                }
+            </div>
+
+            <input type="submit" value="Выбрать" />
+
+        </form>
+        </br>
+        <a asp-area="" asp-controller="Home" asp-action="Index">Cбросить</a>
+    </div>
+
+    @if (stuff.Count != 0)
+    {
+        <div>
+            @foreach (var item in stuff)
+            {
+                <div>
+                    <a href="Home/Stuff?id=@item.ID" id="@item.ID" name="id" value="@item.ID"><button>КУПИТЬ</button></a>
+
+                    <div class="name">@item.Name</div>
+                    <div class="price">@item.Price ₴</div>
+                </div>
+            }
+        </div>
+    }
+</main>

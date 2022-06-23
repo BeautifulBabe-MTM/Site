@@ -1,0 +1,40 @@
+﻿@using WebApplication8.Models;
+@{
+    var stuff = (List<Stuff>)ViewBag.Stuff;
+    var categories = (List<Category>)ViewBag.Categories;
+
+    var Sstuff = (Stuff)ViewBag.CurrentStuff;
+    bool incart = (bool)ViewBag.InCart;
+
+    var ID = Sstuff.ID;
+
+}
+<div style=" display:block; width: 1000px; margin:50px auto;">
+
+    <div style="display:flex; justify-content:space-between">
+        <img alt="" src="@stuff.Find(c=>ID==c.ID)" style="display:inline-block; width:400px; height:auto;"/>
+
+        <div style="margin-top:100px; margin-right:100px; font-size:20px; color:#737373; ">
+            Название:<span style="color:#0a0a0a;"> @Sstuff.Name </span><br /><br />
+            Категория: <span style="color:#0a0a0a;">@categories.Where(a=>a.ID==@Sstuff.Category_id).First().Name  </span><br /><br />
+            </br><br />
+            Цена:  <span style="color:#0a0a0a;">@Sstuff.Price ₴</span><br />
+            <form method="post">
+                <input type="text" value="@Sstuff.ID" name="id" style="display:none;"></input>
+                @if (incart)
+                {
+                    <a asp-area="" asp-controller="Profile" asp-action="Cart"> <button type="button" style="background-color: #1c87c9; color:#ffffff; width:150px;">В Корзину</button> </a>
+                }
+                else
+                {
+                    <button type="submit" style="background-color: #1c87c9; color:#ffffff; width:150px;">Купить</button>
+                }
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

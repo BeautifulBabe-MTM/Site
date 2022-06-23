@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Delete Category";
+    var cat =  (List<Category>)@ViewBag.Categories;
+}
+
+@foreach (var item in cat)
+{
+    <form method="post" class="admin-delete">
+                    <label> @item.Name </label>
+                    <input type="text" name="id" value="@item.ID" style="display:none;"></input>
+                     <button type="submit" style="border:none;"><img src="https://cdn1.iconfinder.com/data/icons/basic-ui-elements-coloricon/21/19-512.png" style="width:30px; height:30px;" /></button>
+    </form>
+    <br/>
+}
+

@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Add Stuff";
+}
+@using WebApplication8.Models;
+@{
+    var prod = (List<Stuff>)ViewBag.Stuff;
+    var categories = (List<Category>)ViewBag.Categories;
+}
+
+<div class="admin-container">
+<form asp-action="AddStuff" asp-controller="Admin" method="post" enctype="multipart/form-data" id="bookform">
+    <h1>Add Stuff</h1><br/>
+    <hr/>
+    <label>Price:</label><br/>
+    <input name="price" type="number" step="0.01" required>
+    <br/>
+    <br/>
+     <label>Image:</label><br/>
+    <input name="file" type="file" accept="image/jpeg"  required>
+    <br/>
+    <br/>
+    <label>Name:</label><br/>
+    <input name="name" type="text" required>
+    <br/>
+    <br/>
+    <label>Category:</label><br/>
+    <select id="category" name="category">
+            @foreach (var item in categories)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+    </select>
+    <br/>
+    <br/>
+    <button type="submit" style="background-color: #1c87c9; color: #ffffff;" >Upload</button>
+</form>
+
+</div>

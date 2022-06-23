@@ -109,9 +109,8 @@ namespace WebApplication8.Contollers
             ViewBag.Stuff = DBStuff.stuff.Where(p => p.Name.ToLower().Contains(q.ToLower())).ToList();
             ViewBag.Categories = DBStuff.categories;
 
+
             ViewBag.Login = HttpContext.Session.GetString("UserID");
-
-
 
             ViewBag.Stf = new List<string>();
             ViewBag.Ctg = new List<string>();

@@ -111,6 +111,8 @@ namespace WebApplication8.Contollers
 
             ViewBag.Login = HttpContext.Session.GetString("UserID");
 
+
+
             ViewBag.Stf = new List<string>();
             ViewBag.Ctg = new List<string>();
 

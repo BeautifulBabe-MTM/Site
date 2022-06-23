@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication8.Models;
+using System.Diagnostics;
+using MySql.Data.MySqlClient;
+using System.IO;
+using System.Text;
 
 namespace WebApplication8.Controllers
 {
@@ -10,26 +14,26 @@ namespace WebApplication8.Controllers
         {
             _logger = logger;
         }
-        [HttpGet]
-        public IActionResult Menu()
-        {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                {
-                    ViewBag.Login = string.Empty;
-                }
-            }
-            else
-                ViewBag.Login = string.Empty;
+        //[HttpGet]
+        //public IActionResult Menu()
+        //{
+        //    if (HttpContext.Session.GetString("UserID") != null)
+        //    {
+        //        if (HttpContext.Session.GetString("UserID") != string.Empty)
+        //        {
+        //            User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
+        //            ViewBag.Login = user.Login;
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Login = string.Empty;
+        //        }
+        //    }
+        //    else
+        //        ViewBag.Login = string.Empty;
 
-            return View();
-        }
+        //    return View();
+        //}
         [HttpGet]
         public IActionResult AddStuff()
         {
@@ -37,7 +41,7 @@ namespace WebApplication8.Controllers
             {
                 if (HttpContext.Session.GetString("UserID") != string.Empty)
                 {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
+                    User user = new User(int.Parse(HttpContext.Session.GetString("UserID")), "admin123", "123zxc34");
                     ViewBag.Login = user.Login;
                 }
                 else
@@ -57,41 +61,12 @@ namespace WebApplication8.Controllers
 
             DBStuff.AddStuff(price, image, name, category);
 
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                {
-                    ViewBag.Login = string.Empty;
-                }
-            }
-            else
-            {
-                ViewBag.Login = string.Empty;
-            }
-
             return View();
         }
 
         [HttpGet]
         public IActionResult AddCategory()
         {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                    ViewBag.Login = string.Empty;
-            }
-            else
-                ViewBag.Login = string.Empty;
 
             return View();
         }
@@ -99,18 +74,6 @@ namespace WebApplication8.Controllers
         [HttpPost]
         public IActionResult AddCategory(string name)
         {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                    ViewBag.Login = string.Empty;
-            }
-            else
-                ViewBag.Login = string.Empty;
 
             DBStuff.AddCategory(name);
             return View();
@@ -118,18 +81,6 @@ namespace WebApplication8.Controllers
         [HttpPost]
         public IActionResult DeleteCategory(int id)
         {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                    ViewBag.Login = string.Empty;
-            }
-            else
-                ViewBag.Login = string.Empty;
 
             if (DBStuff.stuff.Where(p => p.Category_id == id).Count() == 0)
                 DBStuff.DeleteCategory(id);
@@ -142,43 +93,12 @@ namespace WebApplication8.Controllers
         [HttpGet]
         public IActionResult DeleteCategory()
         {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                    ViewBag.Login = string.Empty;
-            }
-            else
-                ViewBag.Login = string.Empty;
-
-
             ViewBag.Categories = DBStuff.categories;
             return View();
         }
         [HttpGet]
         public IActionResult DeleteStuff()
         {
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                {
-                    ViewBag.Login = string.Empty;
-                }
-            }
-            else
-            {
-                ViewBag.Login = string.Empty;
-            }
-
             ViewBag.Stuff = DBStuff.stuff;
             ViewBag.Categories = DBStuff.categories;
 
@@ -189,23 +109,6 @@ namespace WebApplication8.Controllers
         public IActionResult DeleteStuff(int stuff_id)
         {
             DBStuff.DeleteStuff(stuff_id);
-
-            if (HttpContext.Session.GetString("UserID") != null)
-            {
-                if (HttpContext.Session.GetString("UserID") != string.Empty)
-                {
-                    User user = UserOptions.GetUser(int.Parse(HttpContext.Session.GetString("UserID")));
-                    ViewBag.Login = user.Login;
-                }
-                else
-                {
-                    ViewBag.Login = string.Empty;
-                }
-            }
-            else
-            {
-                ViewBag.Login = string.Empty;
-            }
 
             ViewBag.Stuff = DBStuff.stuff;
             ViewBag.Categories = DBStuff.categories;

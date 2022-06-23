@@ -87,7 +87,7 @@ public class DBStuff
         GetStuff();
     }
 }
-namespace WebApplication8.Contollers 
+namespace WebApplication8.Contollers
 {
     public class HomeController : Controller
     {
@@ -103,14 +103,8 @@ namespace WebApplication8.Contollers
             if (q == null)
                 q = string.Empty;
 
-            if (HttpContext.Session.GetString("UserID") == null)
-                HttpContext.Session.SetString("UserID", "");
-
             ViewBag.Stuff = DBStuff.stuff.Where(p => p.Name.ToLower().Contains(q.ToLower())).ToList();
             ViewBag.Categories = DBStuff.categories;
-
-
-            ViewBag.Login = HttpContext.Session.GetString("UserID");
 
             ViewBag.Stf = new List<string>();
             ViewBag.Ctg = new List<string>();
@@ -148,7 +142,7 @@ namespace WebApplication8.Contollers
             if (HttpContext.Session.GetString("UserID") != null)
             {
                 if (HttpContext.Session.GetString("UserID") != string.Empty)
-                    ViewBag.InCart = UserOptions.GetCart(int.Parse(HttpContext.Session.GetString("UserID"))).Any(i => i == id);
+                    ViewBag.InCart = new User(int.Parse(HttpContext.Session.GetString("UserID")), "admin123", "123zxc34");
                 else
                     ViewBag.InCart = false;
             }
@@ -169,11 +163,6 @@ namespace WebApplication8.Contollers
 
             if (HttpContext.Session.GetString("UserID") == string.Empty)
                 return Redirect("../Profile/LogIn");
-
-            else
-                UserOptions.AddToCart(id, int.Parse(HttpContext.Session.GetString("UserID")));
-
-            ViewBag.InCart = UserOptions.GetCart(int.Parse(HttpContext.Session.GetString("UserID"))).Any(i => i == id);
 
             ViewBag.CurrentStuff = DBStuff.stuff.Where(p => p.ID == id).First();
 

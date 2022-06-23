@@ -8,33 +8,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebStoreASP</title>
+    <title>@ViewData["Title"] - El Weedo 420</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/WebStoreASP.styles.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
-    @if (ViewData["Title"] == "Log In" || ViewData["Title"] == "Sign In")
-    {
-        <link rel="stylesheet" href="~/css/LogIn.css" asp-append-version="true" />
-    }
-    @if (ViewData["Title"] == "Profile" || ViewData["Title"] == "Log In" || ViewData["Title"] == "Sign In")
-    {
-        <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
-    }
-    @if (ViewData["Title"] == "Cart" || ViewData["Title"] == "Delete Book")
-    {
-        <link rel="stylesheet" href="~/css/Cart.css" asp-append-version="true" />
-    }
-    <link rel="stylesheet" href="~/css/Admin.css" asp-append-version="true" />
-
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                    BookStore
+                    El Weedo 420
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -47,16 +33,13 @@
                         @if (UserName == string.Empty)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="LogIn">Log In</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogIn">Log In</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Cart"><img src="https://www.svgrepo.com/show/80543/shopping-cart-outline.svg" style="width:32px; height:32px;" /></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Profile"><img src="https://cdn.iconscout.com/icon/free/png-256/account-avatar-profile-human-man-user-30448.png" style="width:32px; height:32px;" /></a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SignIp">Sign Up</a>
                             </li>
                         }
                     </ul>

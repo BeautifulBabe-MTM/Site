@@ -1,0 +1,268 @@
+﻿body {
+    background-color: rgb(255, 216, 0);
+}
+
+.mainheader {
+    background-color: #68c15a;
+    width: 100%;
+}
+
+.headercontainer {
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.but {
+    font-family: 'PT Sans', sans-serif;
+
+}
+.atuin-btn {
+    display: inline-flex;
+    margin: 10px;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 12px 30px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Roboto Condensed', Тahoma, sans-serif;
+    background: #337AB7;
+    cursor: pointer;
+    border: 2px solid #BFE2FF;
+    overflow: hidden;
+    z-index: 1;
+    text-decoration: none;
+}
+
+    .atuin-btn:hover,
+    .atuin-btn:active,
+    .atuin-btn:focus {
+        color: #FFF;
+    }
+
+    .atuin-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -50px;
+        bottom: 0;
+        left: 0;
+        border-right: 50px solid transparent;
+        border-top: 70px solid #2D6B9F;
+        transition: transform 0.5s;
+        transform: translateX(-100%);
+        z-index: -1;
+    }
+
+    .atuin-btn:hover:before,
+    .atuin-btn:active:before,
+    .atuin-btn:focus:before {
+        transform: translateX(0);
+    }
+
+
+.cart-button {
+    background-color: #68c15a;
+    color: white;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    padding: 12px;
+    width: auto;
+    margin: 10px 10px 10px 10px;
+    transition: 0.3s ease;
+}
+
+    .cart-button:hover {
+        padding: 15px;
+        background-color: #6ddd5b;
+        transition: 0.3s ease;
+        transform: scale(0.96);
+    }
+
+.admin_panel
+{
+    margin-left: 5%;
+    
+}
+.cart
+{
+    margin-left: 50%;
+}
+
+.logo {
+    padding-top: 8px;
+    font-family: Circe-B;
+    color: #0b2a3d;
+    margin-left: 0.5%;
+    text-decoration: none;
+}
+    
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+.product-item {
+    width: 300px;
+    text-align: center;
+    border-bottom: 2px solid #F5F5F5;
+    background: white;
+    font-family: "Open Sans";
+    transition: .3s ease-in;
+    width: 24%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    
+}
+
+    .product-item:hover {
+        border-bottom: 2px solid #fc5a5a;
+    }
+
+    .product-item img {
+        display: block;
+        width: 100%;
+    }
+
+.product-list {
+    background: #fafafa;
+    padding: 15px 0;
+    
+}
+
+    .product-list h3 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #444444;
+        
+    }
+
+.price {
+    font-size: 16px;
+    color: #fc5a5a;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 12px;
+    background: #cccccc;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 28px;
+    transition: .3s ease-in;
+}
+
+.product-item:hover .button {
+    background: #fc5a5a;
+}
+
+.main_products_cards
+{
+    margin-top: 20px;
+    margin-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.input {
+    margin-left: 80px;
+    border-radius: 10px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}
+
+.background_but {
+    background: #337AB7;
+    font-weight: bold;
+}
+
+.background_but1 {
+    background: #FF8C85;
+    font-weight: bold;
+}

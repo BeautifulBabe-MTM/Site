@@ -1,0 +1,28 @@
+﻿@using Site.Data;
+
+@page "/editcat"
+
+<select @bind="catid">
+    @foreach (var item in DBservice.category)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
+<br>
+<label for="price"><b>Change Category</b></label>
+<input @bind-value="name" type="text" placeholder="Change the Name of Category" name="name" required>
+
+<button @onclick="Edit" class="background_but">Apply Changes</button>
+
+
+@code {
+    private int catid;
+    private string name = string.Empty;
+
+    private void Edit()
+    {
+        DBservice.EditCategory(name, catid);
+        DBservice.GetDataFromDB();
+        name = string.Empty; 
+    }
+}

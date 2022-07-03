@@ -1,0 +1,51 @@
+﻿@using Site.Data;
+@using Microsoft.EntityFrameworkCore;
+@using Site.Pages;
+
+@*@inject Blazored.LocalStorage.ILocalStorageService session;*@
+
+@page "/basket"
+
+<PageTitle>Basket</PageTitle>
+
+<div class="main_products_cards">
+    @if (clientid != 0)
+    {
+        @foreach (var item in DBservice.basket)
+        {
+            @if (clientid != 0 && item.UserID == clientid)
+            {
+                <div class="product-item">
+                    <img src="@item.Image">
+                    <div class="product-list">
+                        <h3>@item.Name</h3>
+                        <span class="price">@item.Price </span>
+                        <button style="background: red" @onclick="((args)=>DeleteFromBasket(item))">Delete</button>
+                    </div>
+                </div>
+            }
+        }
+    }
+</div>
+
+
+
+@code
+{
+    string login = "l";
+    string searchQuery = string.Empty;
+    int clientid;
+
+    protected override async void OnInitialized()
+    {
+        //login = await session.GetItemAsync<string>("user");
+        clientid = DBservice.client.Where(x => x.Login == login).FirstOrDefault().Id;
+        StateHasChanged();
+    }
+
+    private void DeleteFromBasket(Basket basket)
+    {
+        DBservice.DeleteBasket(basket);
+        DBservice.GetDataFromDB();
+    }
+}

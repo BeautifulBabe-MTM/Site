@@ -1,0 +1,25 @@
+﻿@using Site.Data;
+@using Site.Net;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState appstate;
+@inject NavigationManager nav;
+
+@page "/addcategory"
+
+<label for="price"><b>Name of category</b></label>
+    <input @bind-value="name"  type="text" placeholder="Enter name of category" name="price" required>
+
+<button @onclick="AddCategory" class="background_but">Apply</button>
+
+@code 
+{
+    private string name = string.Empty;
+
+    private void AddCategory()
+    {
+        DBservice.AddCategory(name);
+        DBservice.GetDataFromDB();
+        name = string.Empty;
+    }
+}

@@ -1,0 +1,34 @@
+﻿@using Site.Data;
+
+@page "/deletepage"
+
+<select @bind="furnitureid">
+    @foreach (var item in DBservice.furniture)
+    {
+        <option value="@item.Id">@item.Name | @item.Id</option>
+    }
+</select>
+
+@if (furnitureid != -1)
+{
+    Furniture furniture = DBservice.furniture.FirstOrDefault(x => x.Id == furnitureid);
+    <div class="product-item">
+        <img src="@furniture.Image">
+        <div class="product-list">
+            <h3>@furniture.Name</h3>
+            <span class="price">@furniture.Price </span>
+        </div>
+    </div>
+    <button class="btn btn-danger" @onclick="@((args)=>removeitem(furniture))">Delete</button>
+}
+
+@code
+{
+    int furnitureid = -1;
+    private void removeitem(Furniture furniture)
+    {
+        DBservice.RemoveFurniture(furniture);
+        DBservice.GetDataFromDB();
+        furnitureid = -1;
+    }
+}

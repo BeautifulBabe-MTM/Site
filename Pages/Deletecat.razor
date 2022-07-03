@@ -1,0 +1,28 @@
+﻿@using Site.Data;
+
+@page "/deletecategory"
+
+
+<select @bind="categoryid">
+    @foreach (var item in DBservice.category)
+    {
+        <option value="@item.Id">@item.Name </option>
+    }
+</select>
+
+@if (categoryid != -1)
+{
+    Category category = DBservice.category.FirstOrDefault(x => x.Id == categoryid);
+    <button class="btn btn-danger" @onclick="@((args)=>removecat(category))">Delete</button>
+}
+
+@code
+{
+    int categoryid = -1;
+    private void removecat(Category category)
+    {
+        DBservice.RemoveCategory(category);
+        DBservice.GetDataFromDB();
+        categoryid = -1;
+    }
+}

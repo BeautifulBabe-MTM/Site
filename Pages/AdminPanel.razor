@@ -1,0 +1,30 @@
+﻿@using Site.Data;
+
+@page "/adminpanel"
+
+<div>
+    <NavLink href="/addcardpage">
+        <button style="width: 49%;" class="background_but">Add Stuff</button>
+    </NavLink>
+    <NavLink href="/addcategory">
+        <button style=" width: 49%;"class="background_but">Add Category</button>
+    </NavLink>
+
+    <NavLink href="/editcards">
+        <button style="background: green; width: 49%;" class="background_but">Change Stuff</button>
+    </NavLink>
+    <NavLink href="/editcat">
+        <button style="background: green; width: 49%;" class="background_but">Change Category</button>
+    </NavLink>
+
+    <NavLink href="/deletepage">
+        <button style="background: red; width: 49%;" class="background_but">Delete Stuff</button>
+    </NavLink>
+    <NavLink href="/deletecategory">
+        <button style="background: red;  width: 49%;" class="background_but">Delete Category</button>
+    </NavLink>
+</div>
+@code
+{
+     //margin-left: 50%;
+}

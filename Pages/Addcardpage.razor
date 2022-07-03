@@ -1,0 +1,48 @@
+﻿@using Site.Data;
+@using Site.Net;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState appstate;
+@inject NavigationManager nav;
+
+@page "/addcardpage"
+
+<label for="price"><b>Price</b></label>
+<input @bind-value="price" type="text" placeholder="Price of the Stuff" name="price" required>
+
+<label for="img"><b>Image</b></label>
+<input @bind-value="img" type="text" placeholder="Image Link" name="img" required>
+
+<label for="name"><b>Name</b></label>
+<input @bind-value="name" type="text" placeholder="Name of the Stuff" name="name" required>
+
+<label for="categoryid"><b>Category</b></label>
+<input @bind-value="categoryid" type="text" placeholder="ID of the Stuff" name="categoryid" required>
+
+<button @onclick="AddCards" class="background_but">Add</button>
+
+<select @bind="categoryid">
+    @foreach (var item in DBservice.category)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
+
+@code
+{
+    int category = -1;
+
+    private int price = 0;
+    private string img = string.Empty;
+    private string name = string.Empty;
+    private int categoryid;
+
+    //db.Category.FirstOrDefault(x => x.Id == categoryid)
+    private void AddCards()
+    {
+        DBservice.AddFurniture(img, name, price, categoryid);
+        DBservice.GetDataFromDB();
+        price = 0; img = string.Empty; name = string.Empty; categoryid = DBservice.category.First().Id;
+    }
+
+}

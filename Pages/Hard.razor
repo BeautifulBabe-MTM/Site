@@ -1,0 +1,42 @@
+﻿@using Site.Data;
+@using Microsoft.EntityFrameworkCore;
+
+@*@inject Blazored.LocalStorage.ILocalStorageService session;*@
+
+@page "/hard"
+
+<PageTitle>Closets</PageTitle>
+
+<input class="input" maxlength="30" placeholder="Search Stuff" @bind-value="searchQuery" @bind-value:event="oninput" />
+<div class="main_products_cards">
+    @foreach (var item in DBservice.furniture.Where(x => x.Category.Id == 1))
+    {
+        if (searchQuery == String.Empty || (searchQuery != String.Empty && item.Name.ToLower().Contains(searchQuery.ToLower())))
+        {
+            <div class="product-item">
+                <img src="@item.Image">
+                <div class="product-list">
+                    <h3>@item.Name</h3>
+                    <span class="price">@item.Price </span>
+                    <a @onclick="((args)=>AddToBasket(item.Id))" class="button">Add to Cart</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code 
+{
+    int clientid;
+    string searchQuery = string.Empty;
+    string login = "l";
+
+    public async void AddToBasket(int Id)
+    {
+       //login = await session.GetItemAsync<string>("user");
+        clientid = DBservice.client.Where(x => x.Login == login).FirstOrDefault().Id;
+        DBservice.AddBasket(new Site.Data.Basket { Price = DBservice.furniture[Id-1].Price, Image = DBservice.furniture[Id-1].Image, Name = DBservice.furniture[Id-1].Name, FurnitureID = Id-1, UserID = clientid });
+
+        DBservice.GetDataFromDB();
+    }
+}

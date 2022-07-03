@@ -1,0 +1,29 @@
+﻿@inject NavigationManager nav;
+@using Site.Data;
+@inject AppState appstate;
+
+@page "/reg"
+
+<PageTitle>Registration</PageTitle>
+
+<div class="container but">
+    <label for="uname"><b>Choose Login</b></label>
+    <input @bind-value="login" type="text" placeholder="Enter login" name="uname" required>
+
+    <label for="psw"><b>Choose Password</b></label>
+    <input @bind-value="password" type="password" placeholder="Enter password" name="psw" required>
+
+    <button @onclick="Registration" class="background_but">Sign Up</button>
+</div>
+
+@code
+{
+    private string login = string.Empty;
+    private string password = string.Empty;
+
+    private void Registration()
+    {
+        DBservice.AddUser(login, password);
+        nav.NavigateTo("/auth/");
+    }
+}

@@ -1,0 +1,39 @@
+﻿@using Site.Data;
+
+@page "/editcards"
+
+<select @bind="cardid">
+    @foreach (var item in DBservice.furniture)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
+<br>
+<label for="price"><b>Change the Price</b></label>
+<input @bind-value="price" type="text" placeholder="Price of the Stuff" name="price" required>
+
+<label for="img"><b>Change the Image</b></label>
+<input @bind-value="img" type="text" placeholder="Stuff`s Image Link" name="img" required>
+
+<label for="name"><b>Change the Name</b></label>
+<input @bind-value="name" type="text" placeholder="Name of the Stuff" name="name" required>
+
+<label for="category"><b>Change the Category</b></label>
+<input @bind-value="categoryid" type="text" placeholder="Category ID of the Stuff" name="category" required>
+
+<button @onclick="Edit" class="background_but">Apply Changes</button>
+
+@code { 
+    private int cardid;
+    private int price;
+    private string img = string.Empty;
+    private string name = string.Empty;
+    private int categoryid;
+
+    private void Edit()
+    {
+        DBservice.EditFurniture(cardid, img, name, price, categoryid);
+        DBservice.GetDataFromDB();
+        price = 0; img = string.Empty; name = string.Empty; categoryid = DBservice.category.First().Id;
+    }
+}

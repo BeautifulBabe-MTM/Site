@@ -1,0 +1,61 @@
+﻿@using Site.Data;
+
+@inject NavigationManager nav;
+@inject AppState appstate;
+@*@inject Blazored.LocalStorage.ILocalStorageService session;*@
+
+@page "/auth"
+
+<PageTitle>Auth</PageTitle>
+
+<div class="container but">
+    <label for="uname"><b>Login</b></label>
+    <input @bind-value="login" type="text" placeholder="Enter login" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input @bind-value="password" type="password" placeholder="Enter password" name="psw" required>
+
+    <button @onclick="Login" class="background_but">Enter</button>
+    <button @onclick="redirect" class="background_but1">Doesn`t have an account? Sign Up</button>
+    @if (isError)
+    {
+        <span style="color: red">Wrong login or password</span>
+    }
+</div>
+
+@code
+{
+    private string login = string.Empty;
+    private string password = string.Empty;
+    private bool isError = false;
+
+    private void redirect()
+    {
+        nav.NavigateTo("/reg/");
+    }
+
+    private async void Login()
+    {
+        var data = DBservice.authadmin(login, password);
+
+         //await session.SetItemAsync("user", login);
+
+
+        if (data.Item2 != "Вход")
+        {
+            if (data.Item1)
+            {
+                nav.NavigateTo("/adminpanel/");
+            }
+            else
+            {
+                nav.NavigateTo("/");
+            }
+            appstate.UserName = data.Item2;
+        }
+        else
+        {
+            isError = true;
+        }
+    }
+}

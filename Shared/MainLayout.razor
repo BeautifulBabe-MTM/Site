@@ -1,0 +1,69 @@
+﻿@using Site.Data
+@inject AppState AppState
+@implements IDisposable
+@inherits LayoutComponentBase
+
+<PageTitle>El Weedo 420</PageTitle>
+
+<link href="css/main.css" rel="stylesheet" />
+
+<div>
+    <div class="mainheader">
+        <div class="headercontainer">
+            <div>
+                <NavLink style="text-decoration: none" href="/">
+                    <h1 class="logo noselect">El Weedo 420</h1>
+                </NavLink>
+            </div>
+
+            <div class="buttons-container">
+                <NavLink style="text-decoration: none" href="/hard">
+                    <button class="atuin-btn">Hard Weed</button>
+                </NavLink>
+                <NavLink style="text-decoration: none" href="/med">
+                    <button class="atuin-btn">Medium Weed</button>
+                </NavLink>
+                <NavLink style="text-decoration: none" href="/low">
+                    <button class="atuin-btn">Low Weed</button>
+                </NavLink>
+                <NavLink style="text-decoration: none" href="/newf">
+                    <button class="atuin-btn">For Newfew</button>
+                </NavLink>
+
+                <NavLink style="text-decoration: none" href="/adminpanel">
+                    <button class="atuin-btn">Admin</button>
+                </NavLink>
+
+                <div class="cart">
+                    <NavLink href="/basket">
+                        <img src="https://img.icons8.com/ios/500/shopping-cart.png" width="60" height="60">
+                    </NavLink>
+                </div>
+                <div class="auth">
+                    <NavLink href="/auth">
+                        <button class="atuin-btn">@AppState.UserName</button>
+                    </NavLink>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code
+{
+    protected async override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+        StateHasChanged();
+    }
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+}
